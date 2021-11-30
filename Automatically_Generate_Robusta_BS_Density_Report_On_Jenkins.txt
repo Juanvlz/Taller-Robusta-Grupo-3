@@ -1,0 +1,29 @@
+﻿How to Automatically Generate Robusta BS Density Report on Jenkins
+
+Please make sure:
+I.	Your project is place at where you have write permission.
+II.	Your project is an eclipse project; otherwise, Robusta cannot detect bad smells for you.
+III.	Robusta must be installed on eclipses on your Jenkins node servers (including Jenkins slave.)
+
+1.	Clone or download zipped Robusta on our github web site: https://github.com/NTUTLAB1321Robusta/Robusta
+2.	Find file HLGenerateReport.xml in Robusta, and then copy it into the project folder of which you wish Robusta to automatically generate bad smell density report for every Jenkins build.
+3.	Once you have HLGenerateReport.xml in your project folder on Jenkins, go to configure page of your project. Then add a build step Invoke Ant under build section and enter HLGenerateReport.xml for the Build File after clicking on the Advance. Save to keep the change.
+4.	If you have installed HTML Publisher Plugin, please ignore this step; otherwise, go to Manage Jenkins, then Manage Plugins. Click on the Available tag and enter HTML Publisher Plugin into the Filter on the upper right corner. Install the plugin as it is necessary for displaying Robusta bad smell density report.
+5.	Once the plugin is installed, go to configure page and add a post-build action Publish HTML reports. Then enter Robusta_Report/report for HTML directory to archive, index.html for Index page[s], Robusta Bad Smell Density Report for Report title. Check the Keep past HTML reports if you wish to keep individual report for each build. Check the Allow missing report in case report generation failure turns build status to failure. Save for changes.
+6.	From now on, each build of your project on Jenkins will come with a Robusta bad smell density report on the Build History page and the most current bad smell density report on the Project page.
+
+
+
+在Jenkins上自動產生Robusta壞味道分佈報表教學
+
+注意事項:
+I. 專案必須放在您有讀寫權力的地方。
+II. 專案為 eclipse 專案; 否則 Robusta 無法偵測其中的壞味道。
+III. 您的 Jenkins server 與 Jenkins slave 上的 eclipse 已安裝 Robusta。
+
+1. 從 Github 上下載 Robusta: https://github.com/NTUTLAB1321Robusta/Robusta。
+2. 從下載的 zip 檔中找到 HLGenerateReport.xml 並複製到您專案在 Jenkins server 的根目錄。
+3. 到 Jenkins 專案頁面進入設定頁面，並加入一個呼叫Ant腳本的建製步驟。 點選進階並在建製文件欄填入 HLGenerateReport.xml 後儲存。
+4. 如果您的 Jenkins 已安裝 HTML Publisher Plugin 外掛，跳過步驟4。 否則從 Jenkins 專案頁進入管理 Jenkins 頁面中的管理外掛頁面。 在右上方搜尋欄填入 HTML Publisher Plugin 後安裝此外掛。
+5. 到 Jenkins 專案頁面進入設定頁面，並加入一個建製後動作 Publish HTML reports。 在 HTML directory to archive 欄中填入 Robusta_Report/report，在 Index page[s] 欄填入 index.html，在 Report title 欄中填入 Robusta Bad Smell Density Report，最後在兩個框內打勾後儲存。
+6. 恭喜您，從此 Jenkins 會在每次建製您的專案時自動幫您產生一個壞味道報表，您可以因此節省壞味道報表產生時的等待時間。
